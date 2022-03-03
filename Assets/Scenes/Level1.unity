@@ -1685,7 +1685,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.25
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -1772,7 +1772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballRb: {fileID: 0}
-  ballSpeed: 500
+  ballSpeed: 200
 --- !u!1001 &1134045385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2146,6 +2146,7 @@ MonoBehaviour:
   paddleRb: {fileID: 0}
   paddleDirection: {x: 0, y: 0}
   paddleSpeed: 50
+  maxBounceAngle: 75
 --- !u!61 &1389515189
 BoxCollider2D:
   m_ObjectHideFlags: 0
