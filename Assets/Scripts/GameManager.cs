@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public Ball ball { get; private set; }
+    public Paddle paddle { get; private set; }
 
     public int level = 1;
     public int score = 0;
@@ -13,6 +15,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+
+        SceneManager.sceneLoaded += OnLevelLoaded;
+
     }
 
     private void Start()
@@ -26,12 +31,49 @@ public class GameManager : MonoBehaviour
         this.lives = 3;
         LoadLevel(1);
     }
+  
     private void LoadLevel(int level)
     {
         this.level = level;
         SceneManager.LoadScene("Level" + level);
-         
-
 
     }
+
+    private void OnLevelLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ball = FindObjectOfType<Ball>();
+        paddle = FindObjectOfType<Paddle>();
+    }
+
+    private void ResetLevel() 
+    {
+        ball.ResetBall();
+        paddle.ResetPaddle();
+    }
+
+    private void GameOver()
+    {
+        NewGame();
+    }
+
+    public void Miss()
+    {
+        lives--;
+
+        if (lives > 0)
+        {
+            ResetLevel();
+        }
+        else
+        {
+            GameOver();
+        }
+    }
+
+    public void Hit(Brick brick)
+    {
+        score += brick.point;
+    }
+
+
 }

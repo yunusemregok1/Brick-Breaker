@@ -12,9 +12,16 @@ public class Ball : MonoBehaviour
     }
     void Start()
     {
-        Invoke(nameof(SetRandomTrajectory), 1f);
+        ResetBall();
     }
 
+    public void ResetBall()
+    {
+        transform.position = Vector2.zero;
+        ballRb.velocity = Vector2.zero;
+
+        Invoke(nameof(SetRandomTrajectory), 1f);
+    }
     private void SetRandomTrajectory()
     {
         Vector2 force = Vector2.zero;
