@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public Ball ball { get; private set; }
     public Paddle paddle { get; private set; }
 
+    public Brick[] bricks { get; private set; }
+
     public int level = 1;
     public int score = 0;
     public int lives = 3;
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
     {
         ball = FindObjectOfType<Ball>();
         paddle = FindObjectOfType<Paddle>();
+        bricks = FindObjectsOfType<Brick>();
     }
 
     private void ResetLevel() 
@@ -73,7 +76,22 @@ public class GameManager : MonoBehaviour
     public void Hit(Brick brick)
     {
         score += brick.point;
+        
+        if (Cleared())
+        {
+            LoadLevel(level + 1);
+        }
     }
-
+    private bool Cleared()
+    {
+        for (int i = 0; i < bricks.Length ; i++)
+        {
+            if (bricks[i].gameObject.activeInHierarchy && !bricks[i].unbreaklable )
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
